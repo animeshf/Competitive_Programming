@@ -1,0 +1,1 @@
+This notebook does not include Number Theoretic / Geometry algorithms.
