@@ -1,1 +1,1 @@
-This notebook does not include Number Theoretic / Geometry algorithms.
+This notebook does not include Number Theoretic / Geometry algorithms. It also does not have 2SAT.
