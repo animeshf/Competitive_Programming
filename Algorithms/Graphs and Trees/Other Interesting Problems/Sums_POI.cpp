@@ -17,8 +17,8 @@ int main() {
 	for(int i = 0; i < a1; i++){
 		dist[i] = INF;
 	}
-	priority_queue < ii, vector < ii >, greater < ii > > min_heap;	
-	dist[0] = 0;	
+	priority_queue < ii, vector < ii >, greater < ii > > min_heap;
+	dist[0] = 0;
 	min_heap.push(make_pair(0, 0));
 	while(!min_heap.empty()){
 		ii x = min_heap.top();
