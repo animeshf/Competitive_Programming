@@ -41,7 +41,7 @@ inline double dist_to_segment(int x1, int y1, int x2, int y2){
 }
 
 // Area of the triangle formed by the ordered triplet (a, b, c)
-// Returns a positive value if a -> b -> c forms a counterclockwise turn 
+// Returns a positive value if a -> b -> c forms a counterclockwise turn
 inline long long area(point a, point b, point c){
     return (b.x - a.x) * 1LL * (c.y - a.y) - (b.y - a.y) * 1LL * (c.x - a.x);
 }
@@ -70,7 +70,7 @@ inline bool compare(point b, point c){
     return (det > 0);
 }
 
-// Convex Hull of pt[] array : 
+// Convex Hull of pt[] array :
 // hull[] stores the convex hull in ccw order, idx denotes # of points in hull[]
 inline void convexHull(){
     int min_x = pt[1].x, min_y = pt[1].y, min_idx = 1;
