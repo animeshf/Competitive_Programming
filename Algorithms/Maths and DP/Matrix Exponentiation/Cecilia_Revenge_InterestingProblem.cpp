@@ -1,12 +1,12 @@
 // IOITC 2015 Problem
-/* 
-	DP[i] is a vector of length M denoting the number of arrays 
+/*
+	DP[i] is a vector of length M denoting the number of arrays
 	of length (i) for each 1 <= j <= M
-	
+
 	DP[2] = A * DP[1]
 	DP[3] = B * DP[2] = B * (A * DP[1]) = (B * A) * DP[1]
 	DP[4] = A * DP[3] = (A * (B * A) ) * DP[1]
-	
+
 	Let C = (B * A)
 
 	A is an MxM matrix defined as follows
@@ -16,7 +16,7 @@
 	for each (i, j) , if(j > i)  B[i][j] = 1, else B[i][j] = 0
 
 	C is computed by multiplying B with A
-	
+
 	Ans = power(C, (N - 1) / 2)
 	if( N is even ) Ans = multiply(A, Ans);
 	We need to print sum of elements in Ans
@@ -26,10 +26,10 @@
 	We need to find A[m]^K * C[m]^L * DP[1], where K <= 1, L <= 1000000 and m <= 40
 	Precompute all powers of two of C[] matrix for each 1 <= m <= 40
 
-	Now perform the multiplications in reverse order i.e. Instead of multiplying 
+	Now perform the multiplications in reverse order i.e. Instead of multiplying
 	log N (MxM) matrices and multiplying the final result with a (Mx1) vector, start
 	with multiplying the last (MxM) matrix with the (Mx1) vector and procees backwards.
-	Thus you will keep getting a (Mx1) vector each time and you will perform only M^2 
+	Thus you will keep getting a (Mx1) vector each time and you will perform only M^2
 	operations while multiplying. Total complexity would abound to O(M ^ 2 log N)
 
 */
@@ -104,26 +104,29 @@ matrix mult_sp(matrix x, matrix y, int m){
 }
 
 
+// Note that this code might be rekt on local machine because of recursion with matrices
+// It should work on judges tho
+
 int main(){
-	
+
 	for(int i = 1; i <= 40; i++){
 		unit.mat[i][i] = 1;
 		precompute(i);
 	}
 
 	scanf("%d\n", &Q);
-	
+
 	while(Q--){
-		
-		scanf("%d %d\n", &N, &M);		
+
+		scanf("%d %d\n", &N, &M);
 		for(int i = 1 ; i <= M ; i++) temp.mat[i][1] = 1;
-				
+
 		int cur = (N - 1) >> 1;
 		for(int i = 0 ; i <= 20 ; i++)
 			if(cur & (1 << i)) temp = mult_sp(C[M][i], temp, M);
 
 		if(N % 2 == 0) temp = mult_sp(A[M], temp, M);
-		
+
 		int res = 0;
 		for(int i = 1; i <= M; i++) res = add(res, temp.mat[i][1]);
 		printf("%d\n", res);
