@@ -12,16 +12,16 @@ struct MinimumCostMaximumFlow {
     static const Cost infiniteDistance = 1e18;
     static const Cost EPS = 1e-7;
     static const Flow infiniteFlow = 1e18;
-    
+
     struct Edge{
         int u, v;
         Flow mx, c;
         Cost w;
         Edge(int u, int v, Flow mx, Flow c, Cost w) : u(u), v(v), mx(mx), c(c), w(w) {}
-    };  
-    
+    };
+
     vector < Edge > e;
-    vector < vector < int > > g;  
+    vector < vector < int > > g;
     int n, source, sink, *prev;
     Cost *dist;
 
@@ -43,7 +43,7 @@ struct MinimumCostMaximumFlow {
         // For residual graph
         g[v].push_back(e.size());
         e.push_back(Edge(v, u, 0, 0, -w));
-    }   
+    }
 
     inline pair < Cost, Flow > getMaxFlow(int source, int sink){
         this -> source = source;
@@ -55,7 +55,7 @@ struct MinimumCostMaximumFlow {
             int u = sink;
             Flow pushed = infiniteFlow;
             Cost pushCost = 0;
-            while(u != source){   
+            while(u != source){
                 int id = prev[u];
                 pushed = min(pushed, e[id].c - e[id].mx);
                 pushCost += e[id].w;
@@ -65,7 +65,7 @@ struct MinimumCostMaximumFlow {
             while(u != source){
                 int id = prev[u];
                 e[id].mx += pushed;
-                e[id ^ 1].mx -= pushed;   
+                e[id ^ 1].mx -= pushed;
                 u = e[id].u;
             }
             flow += pushed;
@@ -88,7 +88,7 @@ struct MinimumCostMaximumFlow {
                     dist[v] = dist[u] + w;
                     prev[v] = id;
                     update = true;
-                }   
+                }
             }
             if(!update) break;
         }
@@ -103,9 +103,9 @@ struct MinimumCostMaximumFlow {
         cout << "******" << '\n';
     }
 };
- 
+
 /*
-	In this problem, we are given 2 rooted trees and asked : What is the minimum number of leaves 
+	In this problem, we are given 2 rooted trees and asked : What is the minimum number of leaves
 	you can add to either of these trees such that they are isomorphic i.e. structurally similar?
 
 	We will do the following dp :
@@ -113,25 +113,25 @@ struct MinimumCostMaximumFlow {
 	rooted at (v) in T2 are isomorphic.
 
 	Answer : dp[0][0]
-	
+
 	Base Cases : If (u) and (v) are both leaves, dp[u][v] = 0
-       
+
 	Recurrence :-
 	Let u have n children c1, c2...cn, and v have m children d1, d2, d3.... dm.
-	
-	You can match any c_i with any d_j with cost dp[c_i][d_j]. 
+
+	You can match any c_i with any d_j with cost dp[c_i][d_j].
 	You need to match all c_i with some d_j.
-    
+
     Notice that if m > n, some c_is won't be matched, so you must add that entire subtree
 	as it is. Similarly, if n > m, some d_j's won't be matched hence you must add the entire
 	subtree as it is to make it isomorphic. This can be handled by taking max(n, m) nodes in
 	each partite (thus one of the partites will have some null nodes). The cost of edges with
 	one end point as a null node will be the subtree size of the node at to the other endpoint.
-	
+
 	After making this bipartite graph, you can run min-cost-max-flow to find the minimum
 	cost matching and that would be the desired dp[u][v] value.
 
-	Complexity : O(N ** 3 log N). Summation of edges added = O(N ** 2), and since mcmf works in 
+	Complexity : O(N ** 3 log N). Summation of edges added = O(N ** 2), and since mcmf works in
 	O(V * E * log E), complexity equals O(N ** 3 log N)
 */
 
