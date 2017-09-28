@@ -4,6 +4,7 @@ using namespace std;
 
 // Start of Integer FFT Template.
 // Values are computed modulo 1.6e8
+// The size of the vectors you pass to the function must be a power of 2
 inline long long gcd(long long a, long long b, long long &s, long long &t) {
     if (b == 0) {
         t = 0;
