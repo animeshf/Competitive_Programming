@@ -76,7 +76,8 @@ typedef vector < VT > VVT;
     GaussJordan returns determinant and modifies b passed which stores the values of
     x1, x2...xN
 
-    T is generics which is nice so just use whatever data type you want
+    T is generics which is nice so just use whatever data type you want!!
+    Note: A must be square matrix!!
 */
 
 T GaussJordan(VVT &a, VVT &b) {

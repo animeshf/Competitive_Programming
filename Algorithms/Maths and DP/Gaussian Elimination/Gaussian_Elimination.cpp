@@ -1,16 +1,18 @@
 #include "bits/stdc++.h"
 using namespace std;
 
+// Don't use this template, you coded this and you suck.
+
 /*
 
 	So basically you have N linear equations, each containing the same N variables.
-	Each equation is of the form C = c1 * x1 + c2 * x2 + .. + cN * xN, where C is a 
-	constant(res[]), and c1...cN are the coefficients (co[][]), and x1...xN are the 
+	Each equation is of the form C = c1 * x1 + c2 * x2 + .. + cN * xN, where C is a
+	constant(res[]), and c1...cN are the coefficients (co[][]), and x1...xN are the
 	variables.
-	
+
 	We will go in turns, our goal in the i'th turn is to eliminate xi from all equations.
-	For that we find one equation in which ci != 0, and since any linear combination of 
-	two equations is still true, we can add/subtract this equation to/from the other 
+	For that we find one equation in which ci != 0, and since any linear combination of
+	two equations is still true, we can add/subtract this equation to/from the other
 	equations the correct times, to make ci == 0 in all of the other equations.
 
 	Now we will continue with the remaining equations (N - 1 equations with N - 1 variables)
@@ -25,11 +27,11 @@ using namespace std;
 	....
 	We can process these equations from top to bottom to uncover the values of all variables!
 
-	Note, that in the equations that are used to eliminate a variable, I don't eliminate 
-	any further variables. You use one equation to eliminate x_i from all the other 
+	Note, that in the equations that are used to eliminate a variable, I don't eliminate
+	any further variables. You use one equation to eliminate x_i from all the other
 	equations *that has not been used before*.
 
-	(i.e if you use equation j to eliminate i from all equations, 
+	(i.e if you use equation j to eliminate i from all equations,
 	x_k will not be eliminated from j, if k >= i)
 
 */
@@ -55,7 +57,7 @@ struct gaussian_elimination{
     bool rekt; // is true when unique solution does not exist
     bool u[VAR]; // equation already used to eliminate some variable
     int used[VAR]; // equation used to eliminate the i'th var
-    
+
     inline void read() {
         for(int i = 0; i < VAR; i++){
         	u[i] = false;
@@ -71,7 +73,7 @@ struct gaussian_elimination{
     }
 
     inline void run(){
-        for(int i = 0; i < n; i++){	
+        for(int i = 0; i < n; i++){
             used[i] = -1;
             for(int j = 0; j < n; j++){
                 if(u[j]) continue;
