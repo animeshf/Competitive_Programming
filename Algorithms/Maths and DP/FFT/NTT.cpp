@@ -26,6 +26,15 @@ using namespace std;
        We can work out these values offline by using the find_primitive_root()
        and inverse() functions below, and then hardcode them into the program.
 
+    - Suppose the modulo is not of the form 2^k * x + 1, and we know that in
+      the product polynomial, the coefficients will be less than ~1e15. Then
+      we can compute NTT using large primes p1, p2 (around 1e7) and then
+      compute the value modulo (p1 * p2) using CRT. This will give us a
+      very high precision result :)
+
+    - P1 =  5 * (2 ^ 25) + 1
+      P2 =  7 * (2 ^ 20) + 1
+      P1 * P2 >= 1e15.
     ==================================================
 */
 
