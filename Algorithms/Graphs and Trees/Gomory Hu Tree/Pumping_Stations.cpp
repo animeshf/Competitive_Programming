@@ -7,14 +7,24 @@ using namespace std;
     MMAX : Number of Edges in the Graph
     INF : INFINITY (Should be greater than maximum flow possible)
 
-    We use the Gusfield's Algorithm to construct the Gomory Hu Tree.
-
-    This uses N - 1 Max Flow computations. We use Edmonds' Karp Algorithm
+    We use Gusfield's Algorithm to construct the Gomory Hu Tree.
+    This uses n - 1 Max Flow computations. We use Edmonds' Karp Algorithm
     for the Max Flow. Substituting it with Dinics' would make code faster.
-    The constructed Gomory Hu tree is stored in 'tree'
 
-    Assumes Graph Nodes are indexed from 1 through n.
-    Assumes everything, included all max flow values, fit in integer.
+    Make sure the variable 'n' holds number of nodes in the graph (which MUST be indexed 1 to n).
+    Similarly, 'm' should hold number of edges in the graph. The variables 's'
+    and 't' should not used elsewhere in your code. The function accepts the
+    adjacency matrix of the graph which must be stored in the global 'adj'.
+    It can handle both undirected and directed graphs. To handle multiedges,
+    increment edge weights appropriately (suppose there are c edges between u to v with cost y,
+    then adj[u][v] = c * y).
+
+    The constructed Gomory Hu tree is stored in 'tree'. min_cut[i][j] holds the value of
+    the min_cut between nodes (i) and (j).
+
+    This implementation assumes everything, included all max flow values, fit in 32-bit ints.
+    To deal with long longs, the easiest fix would be #define int long long and replace INF
+    with 1e18.
 */
 
 const int NMAX = 205;
