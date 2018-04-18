@@ -14,6 +14,7 @@ const int M = N * N;
 	Finally : min path cover = count_scc - max_matching()
 
 	Note that if vertex disjointedness was required, we would NOT do a transitive closure.
+	Basically, if you're allowed to pick nonadjacent vertices in a chain then do a transitive closure.
 */
 
 /*
