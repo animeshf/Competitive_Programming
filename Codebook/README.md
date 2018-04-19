@@ -6,4 +6,4 @@ Note that the PDF might not be up to date.
 
 ## Acknowledgments
 
-Credit to [Alex Li](https://github.com/alxli) and his wonderful [repository](https://github.com/alxli/Algorithm-Anthology). A few algorithms in this codebook were taken from the mentioned repository.
+Credit to [Alex Li](https://github.com/alxli) and his wonderful [repository](https://github.com/alxli/Algorithm-Anthology). Few algorithms in this codebook were taken from here.
