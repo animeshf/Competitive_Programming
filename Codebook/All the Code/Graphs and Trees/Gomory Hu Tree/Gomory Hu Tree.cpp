@@ -38,6 +38,7 @@ int par[NMAX], par_in_tree[NMAX];
 bool vis[NMAX];
 vector < pair < int, int > > tree[NMAX];
 vector < int > graph[NMAX];
+vector<pair<int, int>> edges_modified;
 queue < int > bfs;
 
 // Finds several augmenting paths at once
@@ -63,7 +64,11 @@ inline bool augmenting_paths() {
 }
 
 inline int edmonds_karp() {
-    memset(flow, 0, sizeof flow);
+    for (auto e: edges_modified) {
+      flow[e.first][e.second] = 0;
+      flow[e.second][e.first] = 0;
+    }
+    edges_modified.clear();
     int ans = 0;
     while (augmenting_paths()) {
         for (int i = 1; i <= n; ++i) {
@@ -74,11 +79,13 @@ inline int edmonds_karp() {
                     cur_flow = min(cur_flow, cap[par[node]][node] - flow[par[node]][node]);
                     node = par[node];
                 }
+                edges_modified.push_back(make_pair(i, t));
                 flow[i][t] += cur_flow;
                 flow[t][i] -= cur_flow;
                 node = i;
                 ans += cur_flow;
                 while (node != s) {
+                    edges_modified.push_back(make_pair(par[node], node));
                     flow[par[node]][node] += cur_flow;
                     flow[node][par[node]] -= cur_flow;
                     node = par[node];
