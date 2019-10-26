@@ -7,9 +7,11 @@ struct node{
 	int left, right, pr, sz, rev;
 };
 
+// null should be NMAX-1 ideally
 node tree[NMAX];
 int N, null, root;
 
+// Augment this to store values and other quanities.
 inline int create_node(){
 	tree[N].pr = rand();
 	tree[N].sz = 1;
@@ -18,6 +20,7 @@ inline int create_node(){
 	return N++;
 }
 
+// Update quantities here.
 inline int upd(int x){
 	int l = tree[x].left, r = tree[x].right;
 	tree[x].sz = tree[l].sz + tree[r].sz + 1;
@@ -26,6 +29,7 @@ inline int upd(int x){
 
 // Swap left child and right child if it needs to be reversed.
 
+// Update lazy flags here.
 inline void down(int rt){
 	if(!tree[rt].rev) return;
 	swap(tree[rt].left, tree[rt].right);
@@ -111,7 +115,7 @@ inline void reverse(int i, int j){
 	sp2 = split(sp.first, i - 1); // sp2.first = arr[1..i - 1], sp2.second = arr[i..j]
 	tree[sp2.second].rev = 1; // sp2.second needs to be reversed, mark it.
 	sp.first = merge(sp2.first,sp2.second); // Now merge everything normally!
-	assert(merge(sp.first,sp.second) == root); // Merge
+	root = merge(sp.first, sp.second); // Merge
 }
 
 /* 

@@ -111,7 +111,7 @@ inline void reverse(int i, int j){
 	sp2 = split(sp.first, i - 1); // sp2.first = arr[1..i - 1], sp2.second = arr[i..j]
 	tree[sp2.second].rev = 1; // sp2.second needs to be reversed, mark it.
 	sp.first = merge(sp2.first,sp2.second); // Now merge everything normally!
-	assert(merge(sp.first,sp.second) == root); // Merge
+	root = merge(sp.first,sp.second); // Merge
 }
 
 /* 
